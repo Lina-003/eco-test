@@ -1,0 +1,38 @@
+body {
+    background-image: url(https://img.freepik.com/free-vector/gradient-zoom-effect-blue-background_23-2149762303.jpg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    gap: 150px;
+    margin-top: 215px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+    width: 150px;
+}
+
+.Bulbasaur, .Charmander, .Squirtle, .Ivysaur, .Charmeleon, .Wartotle {
+    display: grid;
+    justify-items: center;
+}
+
+.Button button {
+    padding: 10px 20px;
+    background-color: #FFCB05;
+    color: white;
+    border: 3px solid #3466AF;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+.Button button:hover {
+    background-color: #3466AF;
+    border: 3px solid #FFCB05;
+}
