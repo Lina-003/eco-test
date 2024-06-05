@@ -1,41 +1,59 @@
-name: Pokemon Tests
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+name: Autograding Tests
+'on':
+  workflow_dispatch:
+  repository_dispatch:
+permissions:
+  checks: write
+  actions: read
+  contents: read
 jobs:
-  test:
+  run-autograding-tests:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14, 16]
-
+    if: github.actor != 'github-classroom[bot]'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '14'
 
       - name: Install dependencies
         run: npm install
 
       - name: Run Bulbasaur tests
-        run: npm test -- --testNamePattern="fetchBulbasaurData"
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Bulbasaur Tests
+          setup-command: npm install
+          command: npm test -- --testNamePattern="fetchBulbasaurData"
+          timeout: 10
+          max-score: 25
 
       - name: Run Charmander tests
-        run: npm test -- --testNamePattern="fetchCharmanderData"
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Charmander Tests
+          setup-command: npm install
+          command: npm test -- --testNamePattern="fetchCharmanderData"
+          timeout: 10
+          max-score: 25
 
       - name: Run Squirtle tests
-        run: npm test -- --testNamePattern="fetchSquirtleData"
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Squirtle Tests
+          setup-command: npm install
+          command: npm test -- --testNamePattern="fetchSquirtleData"
+          timeout: 10
+          max-score: 25
 
       - name: Run Ivysaur tests
-        run: npm test -- --testNamePattern="fetchIvysaurData"
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Ivysaur Tests
+          setup-command: npm install
+          command: npm test -- --testNamePattern="fetchIvysaurData"
+          timeout: 10
+          max-score: 25
