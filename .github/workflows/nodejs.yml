@@ -1,13 +1,15 @@
-name: Node.js CI
+name: Pokemon Tests
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,22 +17,25 @@ jobs:
         node-version: [14, 16]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Cache Node.js modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    - run: npm install
-    - run: npm test
-      env:
-        CI: true
-    - name: Show test results
-      if: failure()
-      run: cat ./jest-results.txt
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Bulbasaur tests
+        run: npm test -- --testNamePattern="fetchBulbasaurData"
+
+      - name: Run Charmander tests
+        run: npm test -- --testNamePattern="fetchCharmanderData"
+
+      - name: Run Squirtle tests
+        run: npm test -- --testNamePattern="fetchSquirtleData"
+
+      - name: Run Ivysaur tests
+        run: npm test -- --testNamePattern="fetchIvysaurData"
