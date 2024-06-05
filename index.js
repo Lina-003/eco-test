@@ -6,6 +6,30 @@ function fetchBulbasaurData(url) {
     });
 }
 
+function fetchCharmanderData(url) {
+  return fetch(url)
+    .then((response) => response.json())
+    .catch((error) => {
+      throw new Error("Failed to fetch Charmander data: " + error.message);
+    });
+}
+
+function fetchSquirtleData(url) {
+  return fetch(url)
+    .then((response) => response.json())
+    .catch((error) => {
+      throw new Error("Failed to fetch Squirtle data: " + error.message);
+    });
+}
+
+function fetchIvysaurData(url) {
+  return fetch(url)
+    .then((response) => response.json())
+    .catch((error) => {
+      throw new Error("Failed to fetch Ivysaur data: " + error.message);
+    });
+}
+
 function handleBulbasaurData(responseJson) {
   const bulbasaurGif =
     responseJson.sprites.versions["generation-v"]["black-white"].animated
@@ -30,7 +54,7 @@ function showPokemon(bulbasaurGif, bulbasaurName) {
         <img src="${bulbasaurGif}" alt="Bulbasaur">
         <h3>${bulbasaurName}</h3>
         <div class="Button">
-            <button id="btn-1"> Evolución Bulbasur </button>
+            <button id="btn-1"> Evolución Bulbasaur </button>
         </div>
     </div>
     `;
@@ -42,7 +66,7 @@ function showPokemon(bulbasaurGif, bulbasaurName) {
 }
 
 function getBaseIvysaur() {
-  url = "https://pokeapi.co/api/v2/pokemon/ivysaur";
+  const url = "https://pokeapi.co/api/v2/pokemon/ivysaur";
 
   fetch(url)
     .then((response) => response.json())
@@ -72,7 +96,7 @@ function showIvysaur(ivysaurGif, ivysaurName) {
 }
 
 function getBaseCharmander() {
-  url = "https://pokeapi.co/api/v2/pokemon/charmander";
+  const url = "https://pokeapi.co/api/v2/pokemon/charmander";
 
   fetch(url)
     .then((response) => response.json())
@@ -87,8 +111,6 @@ function getBaseCharmander() {
     })
     .catch((error) => error);
 }
-
-getBaseCharmander();
 
 function showCharmander(charmanderGif, charmanderName) {
   const charmander = document.querySelector(".Charmander");
@@ -110,7 +132,7 @@ function showCharmander(charmanderGif, charmanderName) {
 }
 
 function getBaseCharmeleon() {
-  url = "https://pokeapi.co/api/v2/pokemon/charmeleon";
+  const url = "https://pokeapi.co/api/v2/pokemon/charmeleon";
 
   fetch(url)
     .then((response) => response.json())
@@ -140,7 +162,7 @@ function showCharmeleon(charmeleonGif, charmeleonName) {
 }
 
 function getBaseSquirtle() {
-  url = "https://pokeapi.co/api/v2/pokemon/squirtle";
+  const url = "https://pokeapi.co/api/v2/pokemon/squirtle";
 
   fetch(url)
     .then((response) => response.json())
@@ -155,8 +177,6 @@ function getBaseSquirtle() {
     })
     .catch((error) => error);
 }
-
-getBaseSquirtle();
 
 function showSquirtle(squirtleGif, squirtleName) {
   const squirtle = document.querySelector(".Squirtle");
@@ -178,7 +198,7 @@ function showSquirtle(squirtleGif, squirtleName) {
 }
 
 function getBaseWartortle() {
-  url = "https://pokeapi.co/api/v2/pokemon/wartortle";
+  const url = "https://pokeapi.co/api/v2/pokemon/wartortle";
 
   fetch(url)
     .then((response) => response.json())
@@ -210,6 +230,13 @@ function showWartortle(wartortleGif, wartortleName) {
 
 console.log("Corrió");
 
+getBaseBulbasaur();
+getBaseCharmander();
+getBaseSquirtle();
+
 module.exports = {
   fetchBulbasaurData,
+  fetchCharmanderData,
+  fetchSquirtleData,
+  fetchIvysaurData,
 };
